@@ -7,7 +7,7 @@ const VideoEmbed = ({ src, index }) => {
 
     return (
         <div key={`video-${index}`} className="w-full flex justify-center lg:justify-start pt-10">
-            <div className="inline-block w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] 2xl:w-[40%] aspect-[16/9] relative">
+            <div className="inline-block w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] aspect-[16/9] relative">
                 <ReactPlayer
                     url={src}
                     className="absolute top-0 left-0"
@@ -24,6 +24,12 @@ const VideoEmbed = ({ src, index }) => {
                         vimeo: {
                             playerOptions: {
                                 responsive: true,
+                            },
+                        },
+                        file: {
+                            attributes: {
+                                controlsList: 'nodownload',
+                                preload: 'metadata',
                             },
                         },
                     }}

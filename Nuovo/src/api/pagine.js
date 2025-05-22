@@ -10,7 +10,7 @@ export const fetchPages = async () => {
         const response = await axios.get(`${API_URL}`, {
             params: {
                 per_page: 100,
-                orderby: 'date',
+                orderby: 'menu_order',
                 order: 'asc',
             },
         });

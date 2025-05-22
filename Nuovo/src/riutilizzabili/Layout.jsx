@@ -13,6 +13,6 @@ export const Liste = ({ children, className = "" }) => (
 
 // === Titoli.jsx ===
 export const Titoli = ({ children, className = "" }) => (
-    <h3 className={`text-lg font-semibold ${className}`}>{children}</h3>
+    <h3 className={`text-lg font-semibold text-start ${className}`}>{children}</h3>
 );
 

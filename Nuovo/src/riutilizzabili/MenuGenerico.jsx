@@ -36,7 +36,7 @@ const LinkItem = ({
         }
     };
 
-    const baseClass = "block w-fit px-2 py-1 rounded transition-colors font-semibold";
+    const baseClass = "block w-fit px-2 py-1 rounded transition-colors font-semibold text-start";
     const activeClass = isActive ? "bg-[#C22E35] text-white" : "hover:bg-gray-300 dark:hover:bg-gray-700";
 
     return (

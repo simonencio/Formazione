@@ -4,7 +4,8 @@ export const generateAnchors = () => {
         .filter(el => el.id?.trim() !== "")
         .map((el) => ({
             id: el.id,
-            title: el.id,
+            title: el.id.replace(/-/g, " "),
+
         }));
 
     return generatedAnchors;
@@ -27,7 +28,7 @@ export const extractAnchorsFromHTML = (content, pageTitle) => {
     while ((match = anchorRegex.exec(content))) {
         anchors.push({
             id: match[1],
-            title: match[1],
+            title: match[1].replace(/-/g, " "),
             pageTitle,
         });
     }

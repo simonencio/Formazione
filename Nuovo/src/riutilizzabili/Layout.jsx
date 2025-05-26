@@ -1,18 +1,18 @@
 // === GridLayout.jsx ===
-export const GridLayout = ({ children, className = "" }) => (
-    <div className={`w-full grid grid-cols-12 gap-4 px-4 min-h-screen ${className}`}>
+export const GridLayout = ({ children }) => (
+    <div className={`w-full grid grid-cols-12 gap-4 px-4 min-h-screen`}>
         {children}
     </div>
 );
 
 // === Liste.jsx ===
-export const Liste = ({ children, className = "" }) => (
-    <ul className={`list-none ${className}`}>{children}</ul>
+export const Liste = ({ children }) => (
+    <ul className={`list-none ml-4`}>{children}</ul>
 );
 
 
 // === Titoli.jsx ===
-export const Titoli = ({ children, className = "" }) => (
-    <h3 className={`text-lg font-semibold text-start ${className}`}>{children}</h3>
+export const Titoli = ({ children }) => (
+    <h3 className={`text-lg font-semibold text-start`}>{children}</h3>
 );
 

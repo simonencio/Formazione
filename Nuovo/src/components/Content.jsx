@@ -105,7 +105,7 @@ const Content = ({
                     </div>
                     {selectedPage?.anchors?.length > 0 && (
                         <div className={`${sidebarColSpan}`}>
-                            <h5 className={`${tagMap.h5}`}>In questa pagina:</h5>
+                            <h4 className={`${tagMap.h4}`}>In questa pagina:</h4>
                             <SideBar
                                 anchors={selectedPage.anchors}
                                 onAnchorClick={(id) => setCurrentAnchorId(id)}

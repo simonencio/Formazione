@@ -6,7 +6,7 @@ export const getContentColSpan = (selectedPage) => {
 
 // Funzione per ottenere il colSpan del sidebar destro
 export const getSidebarColSpan = () => {
-    return "hidden lg:block lg:col-span-2 text-center sticky top-0 h-100 overflow-y-scroll hide-scrollbar";
+    return "hidden lg:block lg:col-span-2 text-center sticky top-0 h-[100vh] overflow-y-scroll hide-scrollbar";
 };
 
 // Costruisce uno slug completo combinando lo slug corrente con lo slug del genitore (se presente).

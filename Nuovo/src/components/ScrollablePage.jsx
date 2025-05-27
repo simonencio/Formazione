@@ -18,7 +18,15 @@ const ScrollablePage = ({ page, parent, onAnchorChange }) => {
         const { name, attribs = {}, children } = node;
 
         if (name === "iframe" && attribs.src && attribs.src.startsWith("https://")) {
-            return <VideoEmbed key={`video-${index}`} src={attribs.src} index={index} />;
+            let src = attribs.src;
+
+            if (src.includes("youtube.com")) {
+                src = src.replace("youtube.com", "youtube-nocookie.com");
+            } else if (src.includes("youtu.be")) {
+                const videoId = src.split("/").pop();
+                src = `https://www.youtube-nocookie.com/embed/${videoId}`;
+            }
+            return <VideoEmbed key={`video-${index}`} src={src} index={index} />;
         }
 
         // 🏷️ Gestione intestazioni e paragrafi
@@ -63,7 +71,7 @@ const ScrollablePage = ({ page, parent, onAnchorChange }) => {
     }, [page, currentAnchorId, onAnchorChange]);
 
     return (
-        <section id="content-top" className="lg:text-start text-center px-8  lg:pr-0 md:px-12 lg:pl-0 ">
+        <section id="content-top" className="text-start px-4 lg:px-0">
             {parent && (
                 <h1 className={`${tagMap.h1} `}>
                     {parent.title.rendered}

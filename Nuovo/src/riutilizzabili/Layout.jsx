@@ -1,13 +1,13 @@
 // === GridLayout.jsx ===
 export const GridLayout = ({ children }) => (
-    <div className={`w-full grid grid-cols-12 gap-4 px-4 min-h-screen`}>
+    <div className={`w-full grid grid-cols-12 gap-4 px-1 min-h-screen`}>
         {children}
     </div>
 );
 
 // === Liste.jsx ===
 export const Liste = ({ children }) => (
-    <ul className={`list-none ml-4`}>{children}</ul>
+    <ul className={`list-none ml-2`}>{children}</ul>
 );
 
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { extractAnchorsFromHTML } from '../utils/ancore';
 
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "https://guidawp.migsrls.it/wp-json/wp/v2/pages";
 
 // Pagine
 export const fetchPages = async () => {

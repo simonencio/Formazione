@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
-import Logo from "../riutilizzabili/Logo";
 import { useEffect, useState } from "react";
-
 import { fetchPages } from "../api/pagine";
 
-const Footer = ({ contentTopRef }) => {
+const Footer = () => {
     const [pages, setPages] = useState([]);
     const [isDarkMode, setIsDarkMode] = useState(false);
 
@@ -41,22 +39,23 @@ const Footer = ({ contentTopRef }) => {
             <div className="mt-2 items-center">
                 <p>&copy; 2025 Kalimero, Inc. | All Rights Reserved</p>
 
-                {pages.length > 0 ? (
-                    pages.map(page => (
-                        <Link key={page.id} to={`/${page.slug}`} className="footer-links mx-2">
-                            {page.title.rendered}
-                        </Link>
-                    ))
-                ) : (
-                    <p className="footer-links mx-2">Le pagine non sono disponibili.</p>
-                )}
+
+                <Link to='https://www.kalimero.it/privacy-policy/' target="_blank" className="footer-links mx-2" rel="noopener noreferrer">
+                    Privacy Policy
+                </Link>
+
 
                 <div className="p-5">
-                    <Logo src={logoSrc} contentTopRef={contentTopRef} />
+                    <a href="https://www.kalimero.it/" target="_blank" className="flex-1 flex items-center justify-center" rel="noopener noreferrer">
+                        <img
+                            src={logoSrc}
+                            alt="Logo Kalimero"
+                            className="w-[150px] lg:w-[200px] h-auto cursor-pointer "
+                        />
+                    </a>
                 </div>
             </div>
         </footer>
-
     );
 };
 

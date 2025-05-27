@@ -83,7 +83,7 @@ const Content = ({
 
             <div className="flex-grow overflow-y-auto pt-5 hide-scrollbar">
                 <GridLayout>
-                    <div className={`${sidebarColSpan}`}>
+                    <div className={`${sidebarColSpan} `}>
                         <SideBar
                             pagesTree={pagesTree}
                             onLinkClick={handleLinkClick}
@@ -105,7 +105,7 @@ const Content = ({
                     </div>
                     {selectedPage?.anchors?.length > 0 && (
                         <div className={`${sidebarColSpan}`}>
-                            <h4 className={`${tagMap.h4}`}>In questa pagina:</h4>
+                            <h5 className={`${tagMap.h5}`}>In questa pagina:</h5>
                             <SideBar
                                 anchors={selectedPage.anchors}
                                 onAnchorClick={(id) => setCurrentAnchorId(id)}

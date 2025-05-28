@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { executeSearch, handleResultClick } from "../utils/ricerca";
 import { removeHistoryItem, handleHistoryClick } from "../utils/history";
 import { scrollToHashAnchor } from "../utils/ancore";
-import { useTheme } from "../utils/useThemeMode";
+import { useTheme } from "../riutilizzabili/useThemeMode";
 
 const ModaleRicerca = ({ isOpen, onClose }) => {
     const { isDarkMode } = useTheme();

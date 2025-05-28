@@ -9,7 +9,7 @@ import { setupLogoEvents } from "../utils/logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-import { useTheme } from "../utils/useThemeMode";
+import { useTheme } from "../riutilizzabili/useThemeMode";
 
 const Offcanvas = ({ menuOpen, setMenuOpen, pagesTree, currentSlug, onLinkClick, contentTopRef }) => {
     const { isDarkMode } = useTheme();

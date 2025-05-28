@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faSearch, faCircleHalfStroke } from "@fortawesome/free-solid-svg-icons";
-import { useTheme } from "../utils/useThemeMode";
+import { useTheme } from "../riutilizzabili/useThemeMode";
 import ThemeModeDropdown from "./ThemeModeDropdown";
 import ModaleRicerca from "./ModaleRicerca";
 import Logo from "../riutilizzabili/Logo";
@@ -48,7 +48,7 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
             </div>
 
             {/* Azioni: Tema + Ricerca */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center">
                 {/* Pulsante tema con icona */}
                 <div ref={dropdownWrapperRef} className="relative">
                     <button

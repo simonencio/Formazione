@@ -12,7 +12,7 @@ import {
 import { handleUrlChange } from "./utils/url";
 import { monkeyPatchHistoryMethod } from "./utils/history";
 
-import { useTheme } from "./utils/useThemeMode";
+import { useTheme } from "./riutilizzabili/useThemeMode";
 
 const App = () => {
   const { isDarkMode } = useTheme();

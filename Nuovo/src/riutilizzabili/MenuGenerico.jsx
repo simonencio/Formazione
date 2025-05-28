@@ -5,7 +5,7 @@ import { Liste, Titoli } from "../riutilizzabili/Layout";
 import { getFullSlug } from "../utils/url";
 import { isActiveLink } from "../utils/UI";
 import { scrollToAnchor } from "../utils/ancore";
-import { useTheme } from "../utils/useThemeMode"; // Importa il context del tema
+import { useTheme } from "../riutilizzabili/useThemeMode"; // Importa il context del tema
 
 const LinkItem = ({
     slug,

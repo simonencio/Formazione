@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useTheme } from "../utils/useThemeMode";
+import { useState, useEffect } from "react";
+import { useTheme } from "../riutilizzabili/useThemeMode";
 
 const Footer = () => {
     const { isDarkMode } = useTheme();
@@ -15,9 +15,40 @@ const Footer = () => {
         setMousePos({ x: e.clientX, y: e.clientY });
     };
 
+    // Funzione per controllare se siamo sopra md
+    const isAboveMd = () => window.innerWidth >= 768;
+
+    // Wrapper per mostrare tooltip solo se sopra md
+    const handleLogoMouseEnter = () => {
+        if (isAboveMd()) setShowLogoTooltip(true);
+    };
+    const handleLogoMouseLeave = () => {
+        setShowLogoTooltip(false);
+    };
+
+    const handleLinkMouseEnter = () => {
+        if (isAboveMd()) setShowLinkTooltip(true);
+    };
+    const handleLinkMouseLeave = () => {
+        setShowLinkTooltip(false);
+    };
+
+    // Optional: se vuoi fare un reset tooltip quando ridimensioni la finestra sotto md
+    useEffect(() => {
+        const onResize = () => {
+            if (!isAboveMd()) {
+                setShowLogoTooltip(false);
+                setShowLinkTooltip(false);
+            }
+        };
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, []);
+
     return (
         <footer
-            className={`footer-container p-4 text-center ${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`}
+            className={`footer-container p-4 text-center ${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"
+                }`}
             onMouseMove={handleMouseMove}
         >
             <div className="mt-2 items-center relative">
@@ -28,9 +59,10 @@ const Footer = () => {
                         to="https://www.kalimero.it/privacy-policy/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={`footer-links mx-2 hover:text-[#c22e35] ${isDarkMode ? "text-gray-400" : "text-gray-700"}`}
-                        onMouseEnter={() => setShowLinkTooltip(true)}
-                        onMouseLeave={() => setShowLinkTooltip(false)}
+                        className={`footer-links mx-2 hover:text-[#c22e35] ${isDarkMode ? "text-gray-400" : "text-gray-700"
+                            }`}
+                        onMouseEnter={handleLinkMouseEnter}
+                        onMouseLeave={handleLinkMouseLeave}
                     >
                         Privacy Policy
                     </Link>
@@ -41,8 +73,8 @@ const Footer = () => {
                         href="https://www.kalimero.it/"
                         target="_blank"
                         rel="noopener noreferrer"
-                        onMouseEnter={() => setShowLogoTooltip(true)}
-                        onMouseLeave={() => setShowLogoTooltip(false)}
+                        onMouseEnter={handleLogoMouseEnter}
+                        onMouseLeave={handleLogoMouseLeave}
                     >
                         <img
                             src={logoSrc}

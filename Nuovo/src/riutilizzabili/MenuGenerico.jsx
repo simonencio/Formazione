@@ -5,10 +5,9 @@ import { Liste, Titoli } from "../riutilizzabili/Layout";
 import { getFullSlug } from "../utils/url";
 import { isActiveLink } from "../utils/UI";
 import { scrollToAnchor } from "../utils/ancore";
+import { useTheme } from "../utils/useThemeMode"; // Importa il context del tema
 
-// Componente LinkItem interno
 const LinkItem = ({
-
     slug,
     label,
     isActive,
@@ -16,9 +15,9 @@ const LinkItem = ({
     parentSlug = "",
     currentSlug,
     id,
-    type = "menu" // 'menu' o 'anchor'
+    type = "menu"
 }) => {
-
+    const { isDarkMode } = useTheme(); // Legge lo stato attuale del tema
     const navigate = useNavigate();
     const fullSlug = slug ? getFullSlug(slug, parentSlug) : "";
     const href = type === "menu" ? `/${fullSlug}/` : `#${id}`;
@@ -36,17 +35,26 @@ const LinkItem = ({
         }
     };
 
-    const baseClass = "block w-fit px-2 py-1 rounded transition-colors font-semibold text-start text-md";
-    const activeClass = isActive ? "bg-[#C22E35] text-white" : "hover:bg-gray-300 dark:hover:bg-gray-700";
+    const baseClass = `
+    block w-fit px-2 py-1 rounded transition-colors font-semibold text-start text-md
+    ${isDarkMode ? "text-white" : "text-black"}
+  `;
+
+    const hoverClass = isActive
+        ? "hover:bg-[#C22E35]"  // quando è attivo, hover mantiene lo stesso bg rosso
+        : isDarkMode
+            ? "hover:bg-gray-700"  // quando non attivo, hover normale in dark mode
+            : "hover:bg-gray-300"; // quando non attivo, hover normale in light mode
+
+    const activeClass = isActive ? "bg-[#C22E35] text-white" : "";
 
     return (
-        <Link to={href} onClick={handleClick} className={`${baseClass} ${activeClass}`}>
+        <Link to={href} onClick={handleClick} className={`${baseClass} ${hoverClass} ${activeClass}`}>
             {label || id}
         </Link>
     );
 };
 
-// Componente principale
 const MenuGenerico = ({
     items,
     currentSlug,
@@ -77,7 +85,7 @@ const MenuGenerico = ({
 
     const renderMenuLinks = (items, parentSlug = "") =>
         items
-            .filter(item => item.slug !== "privacy-policy" && item.slug !== "cookie-policy") // Filtra le pagine
+            .filter(item => item.slug !== "privacy-policy" && item.slug !== "cookie-policy")
             .map((item) => {
                 const label = item.title.rendered;
                 const isActive = isActiveLink(currentSlug, item.slug);
@@ -107,7 +115,6 @@ const MenuGenerico = ({
                 );
             });
 
-
     const renderAnchorLinks = (items) =>
         items.map((item) => {
             const isActive = currentSlug === item.id;
@@ -131,7 +138,7 @@ const MenuGenerico = ({
         });
 
     return (
-        <div className={`${className}`}>
+        <div className={className}>
             <Liste>
                 {items?.length > 0 && renderMenuLinks(items)}
                 {anchors?.length > 0 && renderAnchorLinks(anchors)}

@@ -2,7 +2,7 @@ import { handleLogoClick } from "../utils/logo";
 
 
 const Logo = ({ src, contentTopRef = null, className = "", onClick = null }) => {
-    const logoClassName = "w-[150px] lg:w-[200px] h-auto cursor-pointer"; // Base dimensione logo
+    const logoClassName = "w-[130px] lg:w-[180px] h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl"; // Base dimensione logo
 
     const handleClick = (e) => {
         if (onClick) {

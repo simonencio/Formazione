@@ -9,26 +9,16 @@ import { setupLogoEvents } from "../utils/logo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
+import { useTheme } from "../utils/useThemeMode";
+
 const Offcanvas = ({ menuOpen, setMenuOpen, pagesTree, currentSlug, onLinkClick, contentTopRef }) => {
+    const { isDarkMode } = useTheme();
     const [anchors, setAnchors] = useState([]);
     const [currentAnchorId, setCurrentAnchorId] = useState(null);
     const [pendingAnchorScroll, setPendingAnchorScroll] = useState(null);
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-        setIsDarkMode(darkModeMediaQuery.matches);
-
-        const handleChange = (e) => {
-            setIsDarkMode(e.matches);
-        };
-
-        darkModeMediaQuery.addEventListener("change", handleChange);
-        return () => darkModeMediaQuery.removeEventListener("change", handleChange);
-    }, []);
-
-    const logoSrc = isDarkMode ? "/kalimero_logo.png" : "/kalimero_logo2.png";
+    const logoSrc = isDarkMode ? "/kalimero_logo2.png" : "/kalimero_logo.png";
 
     const handleLinkClick = (slug) => {
         onLinkClick(slug);
@@ -85,8 +75,11 @@ const Offcanvas = ({ menuOpen, setMenuOpen, pagesTree, currentSlug, onLinkClick,
             {menuOpen && (
                 <div className="fixed inset-0 z-[999]">
                     <div className="absolute inset-0 bg-black/50" onClick={() => setMenuOpen(false)} />
-                    <div className="offcanvas-container absolute left-0 top-0 h-full w-full max-w-2xs shadow-lg transition-transform transform">
-                        <div className="h-full overflow-y-auto p-4 offcanvas-content">
+                    <div
+                        className={`offcanvas-container absolute left-0 top-0 h-full w-full max-w-2xs shadow-lg transition-transform transform
+                            ${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-black"}`}
+                    >
+                        <div className={`h-full overflow-y-auto p-4 offcanvas-content`}>
                             <div className="flex justify-between items-center mb-4">
                                 <div className="justify-start">
                                     <Logo
@@ -98,10 +91,12 @@ const Offcanvas = ({ menuOpen, setMenuOpen, pagesTree, currentSlug, onLinkClick,
                                         }}
                                     />
                                 </div>
-                                <button aria-label="Chiudi menu" className="pl-0">
-                                    <FontAwesomeIcon icon={faXmark} size="lg" className="pr-3" onClick={(e) => {
-                                        setMenuOpen(false);
-                                    }} />
+                                <button aria-label="Chiudi menu" className="pl-0" onClick={() => setMenuOpen(false)}>
+                                    <FontAwesomeIcon
+                                        icon={faXmark}
+                                        size="lg"
+                                        className={`pr-3 ${isDarkMode ? "text-white" : "text-black"}`}
+                                    />
                                 </button>
                             </div>
 
@@ -112,7 +107,7 @@ const Offcanvas = ({ menuOpen, setMenuOpen, pagesTree, currentSlug, onLinkClick,
                                 className="space-y-4"
                             />
 
-                            <hr className="offcanvas-divider my-4" />
+                            <hr className={`offcanvas-divider my-4 ${isDarkMode ? "border-gray-300" : "border-gray-700"}`} />
 
                             {anchors.length > 0 && (
                                 <MenuGenerico

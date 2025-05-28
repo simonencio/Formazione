@@ -8,19 +8,9 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.light-mode {
-  background-color: white;
-  color: black;
-}
 
-.dark-mode {
-  background-color: #222; /* grigio scuro */
-  color: #ccc;
-}
 
-.dark-mode a {
-  color: #9ecfff;
-}
+
 
 @keyframes slideIn {
   0% {
@@ -50,64 +40,5 @@
 
 
 
-.app-main {
-  @apply  bg-white text-black dark:bg-gray-800 dark:text-white;
-}
 
-/* Offcanvas */
-
-
-.offcanvas-container {
-  @apply  bg-gray-900 dark:bg-gray-200;
-}
-.offcanvas-content {
-  @apply  text-white dark:text-black;
-}
-
-.offcanvas-divider {
-  @apply  border-gray-300 dark:border-gray-700;
-}
-
-/* Modale Ricerca */
-
-.modal-search-container {
-  @apply bg-gray-900 dark:bg-gray-200;
-}
-.modal-search-input {
-  @apply border-2 border-black text-black bg-white ;
-}
-.modal-search-input::placeholder {
-  @apply text-black ;
-}
-.modal-search-icon {
-  @apply text-black;
-}
-.modal-search-result-btn {
-  @apply  hover:bg-gray-700 dark:hover:bg-gray-200  text-gray-100 dark:text-black;
-}
-.modal-search-history-title {
-  @apply  text-white dark:text-black;
-}
-.modal-search-history-list {
-  @apply  text-white dark:text-black;
-}
-.modal-search-history-remove-btn {
-  @apply  text-red-600 hover:text-red-700 ;
-}
-
-/* Header */
-.header-container {
-  @apply  bg-white dark:bg-gray-900;
-}
-.header-inner {
-  @apply  text-gray-900 dark:text-white;
-}
-
-/* Footer */
-.footer-container {
-  @apply bg-gray-300 dark:bg-gray-900  text-black dark:text-white;
-}
-.footer-links {
-  @apply  text-gray-700 dark:text-gray-400 hover:text-black dark:hover:text-white;
-}
 

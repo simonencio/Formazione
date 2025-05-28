@@ -83,7 +83,7 @@ const Content = ({
 
             <div className="flex-grow overflow-y-auto pt-5 hide-scrollbar">
                 <GridLayout>
-                    <div className={`${sidebarColSpan} `}>
+                    <div className={`${sidebarColSpan}`}>
                         <SideBar
                             pagesTree={pagesTree}
                             onLinkClick={handleLinkClick}
@@ -104,7 +104,7 @@ const Content = ({
                         </div>
                     </div>
                     {selectedPage?.anchors?.length > 0 && (
-                        <div className={`${sidebarColSpan}`}>
+                        <div className={`${sidebarColSpan} `}>
                             <h5 className={`${tagMap.h5}`}>In questa pagina:</h5>
                             <SideBar
                                 anchors={selectedPage.anchors}

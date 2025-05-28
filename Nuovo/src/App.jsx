@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Content from "./components/Content";
-import "./App.css"; // Assicurati che importi Tailwind
+import "./App.css"; // Mantieni l'import per Tailwind
 
 import {
   fetchPages,
@@ -12,7 +12,11 @@ import {
 import { handleUrlChange } from "./utils/url";
 import { monkeyPatchHistoryMethod } from "./utils/history";
 
+import { useTheme } from "./utils/useThemeMode";
+
 const App = () => {
+  const { isDarkMode } = useTheme();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [pagesTree, setPagesTree] = useState([]);
   const [selectedPage, setSelectedPage] = useState(null);
@@ -75,7 +79,10 @@ const App = () => {
   };
 
   return (
-    <main className="app-main flex-grow overflow-hidden">
+    <main
+      className={`app-main flex-grow overflow-hidden
+        ${isDarkMode ? "bg-gray-800 text-white" : "bg-white text-black"}`}
+    >
       <Content
         pagesTree={pagesTree}
         currentSlug={currentSlug}

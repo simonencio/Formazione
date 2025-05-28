@@ -39,7 +39,7 @@ const SideBar = ({
     );
 
     return (
-        <SidebarContainer>
+        <SidebarContainer >
             <MenuGenerico
                 items={isLeftSide ? pagesTree : []} // Mostra le pagine solo nel lato sinistro
                 anchors={anchors} // Passa le ancore a entrambi

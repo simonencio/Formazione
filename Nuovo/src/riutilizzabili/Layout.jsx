@@ -1,6 +1,6 @@
 // === GridLayout.jsx ===
 export const GridLayout = ({ children }) => (
-    <div className={`w-full grid grid-cols-12 gap-4 px-1 min-h-screen`}>
+    <div className={`w-full grid grid-cols-12 gap-4 px-1 min-h-screen shadow-[inset_0_-8px_8px_-8px_rgba(0,0,0,0.3)]`}>
         {children}
     </div>
 );

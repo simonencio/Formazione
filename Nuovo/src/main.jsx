@@ -1,9 +1,12 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-console.log('API URL:', import.meta.env.VITE_API_URL);
+import { ThemeProvider } from "./utils/useThemeMode";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </Router>
 );

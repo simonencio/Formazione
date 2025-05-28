@@ -73,11 +73,17 @@ const ScrollablePage = ({ page, parent, onAnchorChange }) => {
     return (
         <section id="content-top" className="text-start px-4 lg:px-0">
             {parent && (
-                <h1 className={`${tagMap.h1} `}>
+                <h1 className={tagMap.h1}>
                     {parent.title.rendered}
                 </h1>
             )}
-            <h2 className={tagMap.h2}>{page.title.rendered}</h2>
+
+            {page.slug === "home" ? (
+                <h1 className={tagMap.h1}>{page.title.rendered}</h1>
+            ) : (
+                <h2 className={tagMap.h2}>{page.title.rendered}</h2>
+            )}
+
             <div>{parsedContent}</div>
         </section>
     );

@@ -79,7 +79,7 @@ const Offcanvas = ({ menuOpen, setMenuOpen, pagesTree, currentSlug, onLinkClick,
                         className={`offcanvas-container absolute left-0 top-0 h-full w-full max-w-2xs shadow-lg transition-transform transform
                             ${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-200 text-black"}`}
                     >
-                        <div className={`h-full overflow-y-auto p-4 offcanvas-content`}>
+                        <div className={`h-full overflow-y-auto p-4 offcanvas-content hide-scrollbar`}>
                             <div className="flex justify-between items-center mb-4">
                                 <div className="justify-start">
                                     <Logo

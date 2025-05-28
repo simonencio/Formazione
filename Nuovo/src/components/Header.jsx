@@ -28,19 +28,23 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
 
     const headerClasses = `sticky top-0 z-50 p-4 flex justify-between items-center shadow-lg transition-colors duration-300 ${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`;
 
-    const buttonClasses = `cursor-pointer text-[#c22e35] px-3 py-2 rounded transition-colors duration-300 ${isDarkMode ? " hover:bg-gray-700" : " hover:bg-gray-200"}`;
+    const buttonClasses = `cursor-pointer text-[#c22e35] px-3 py-2 rounded transition-colors duration-300`;
 
     return (
         <header className={headerClasses}>
             {/* Menu mobile (hamburger) */}
-            <button
+            <span
                 id="icona-hamburger"
-                className={`${buttonClasses} lg:hidden`}
                 onClick={() => setMenuOpen(true)}
+                className={`${buttonClasses} lg:hidden cursor-pointer`}
+                role="button"
+                tabIndex={0}
                 aria-label="Apri Menu"
+
             >
                 <FontAwesomeIcon icon={faBars} size="lg" />
-            </button>
+            </span>
+
 
             {/* Logo */}
             <div className="lg:justify-start">
@@ -51,13 +55,21 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
             <div className="flex items-center">
                 {/* Pulsante tema con icona */}
                 <div ref={dropdownWrapperRef} className="relative">
-                    <button
+                    <span
                         onClick={toggleDropdown}
-                        className={buttonClasses}
+                        className={`${buttonClasses} cursor-pointer`}
+                        role="button"
+                        tabIndex={0}
                         aria-label="Seleziona tema"
                     >
-                        <FontAwesomeIcon icon={faCircleHalfStroke} size="lg" />
-                    </button>
+                        <FontAwesomeIcon
+                            icon={faCircleHalfStroke}
+                            size="lg"
+                            className="transition-transform duration-300 ease-in-out hover:scale-160 hover:shadow-xl"
+                        />
+                    </span>
+
+
                     {dropdownOpen && (
                         <ThemeModeDropdown
                             selected={themeMode}
@@ -70,14 +82,21 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
                     )}
                 </div>
 
-                {/* Pulsante ricerca */}
-                <button
-                    className={buttonClasses}
-                    aria-label="Cerca"
+                {/* Pulsante ricerca come icona interattiva */}
+                <span
                     onClick={() => setIsModalOpen(true)}
+                    className={`${buttonClasses} cursor-pointer`}
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Cerca"
                 >
-                    <FontAwesomeIcon icon={faSearch} size="lg" />
-                </button>
+                    <FontAwesomeIcon
+                        icon={faSearch}
+                        size="lg"
+                        className="transition-transform duration-300 ease-in-out hover:scale-150 hover:shadow-xl"
+                    />
+                </span>
+
             </div>
 
             {/* Modale ricerca */}

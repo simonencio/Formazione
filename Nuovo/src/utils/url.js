@@ -42,16 +42,30 @@ export const handleUrlChange = (
     setCurrentSlug,
     setIsFirstLoad,
     isFirstLoad,
+    setCurrentAnchorId // AGGIUNTO per supportare ancore
 ) => {
-    const slug = window.location.pathname.replace(/^\/|\/$/g, "").split("/").pop();
+    if (!pagesTree || pagesTree.length === 0) return;
+
+    // Rimuove slash iniziali/finali, estrae slug e ancora
+    let path = window.location.pathname.replace(/^\/|\/$/g, "");
+    const anchorId = window.location.hash.replace("#", "") || null;
+
+    // Se lo slug è vuoto, forza "home"
+    if (path === "") {
+        path = "home";
+        window.history.replaceState(null, "", "/home/");
+    }
+
+    const slugParts = path.split("/");
+    const slug = slugParts[slugParts.length - 1]; // slug finale
     let page = findPageBySlug(pagesTree, slug);
 
+    // Fallback: se pagina non trovata al primo load
     if (!page && isFirstLoad && pagesTree.length) {
         const [firstParent] = pagesTree;
         page = firstParent.children?.[0] || firstParent;
-
         if (page) {
-            const fullSlug = `${firstParent.slug}/${page.slug}`;
+            const fullSlug = firstParent ? `${firstParent.slug}/${page.slug}` : page.slug;
             window.history.replaceState(null, "", `/${fullSlug}/`);
         }
     }
@@ -63,7 +77,13 @@ export const handleUrlChange = (
         setSelectedPage(page);
         setCurrentSlug(fullSlug);
         setIsFirstLoad(false);
+
+        // Se presente, imposta ancora per scroll successivo
+        if (setCurrentAnchorId && anchorId) {
+            setCurrentAnchorId(anchorId);
+        }
     }
 
-    if (window.location.hash) scrollToAnchor();
+    // Scrolla all’ancora se c’è
+    if (anchorId) scrollToAnchor(anchorId);
 };

@@ -65,7 +65,7 @@ const App = () => {
 
       let fullSlug = slug;
       if (parentPage) {
-        fullSlug = `${parentPage.slug}/${slug}`;
+        fullSlug = `${parentPage.slug}/${slug}/`;
       }
 
       const newUrl = `/${fullSlug}/`;

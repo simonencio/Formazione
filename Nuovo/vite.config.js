@@ -7,7 +7,4 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  server: {
-    host: true,  // <- questa riga permette l'accesso da rete
-  },
 });

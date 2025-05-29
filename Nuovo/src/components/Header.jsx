@@ -31,7 +31,7 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
     const logoSrc = isDarkMode ? "/kalimero_logo2.png" : "/kalimero_logo.png";
 
     // Funzione per controllare se siamo sopra md
-    const isAboveMd = () => window.innerWidth >= 768;
+    const isAboveMd = () => window.innerWidth > 768;
 
     // Gestione tooltip logo
     const handleLogoMouseEnter = () => {
@@ -41,8 +41,17 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
         setShowLogoTooltip(false);
     };
 
+    // Nascondi tooltip anche su click e touch se schermo piccolo
+    const handleLogoClickOrTouch = () => {
+        if (!isAboveMd()) {
+            setShowLogoTooltip(false);
+        }
+    };
+
     const handleMouseMove = (e) => {
-        setMousePos({ x: e.clientX, y: e.clientY });
+        if (isAboveMd()) {
+            setMousePos({ x: e.clientX, y: e.clientY });
+        }
     };
 
     useEffect(() => {
@@ -81,6 +90,8 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
                     rel="noopener noreferrer"
                     onMouseEnter={handleLogoMouseEnter}
                     onMouseLeave={handleLogoMouseLeave}
+                    onClick={handleLogoClickOrTouch}
+                    onTouchStart={handleLogoClickOrTouch}
                 >
                     <Logo src={logoSrc} contentTopRef={contentTopRef} />
                 </a>

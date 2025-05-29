@@ -16,7 +16,7 @@ const Footer = () => {
     };
 
     // Funzione per controllare se siamo sopra md
-    const isAboveMd = () => window.innerWidth >= 768;
+    const isAboveMd = () => window.innerWidth > 768;
 
     // Wrapper per mostrare tooltip solo se sopra md
     const handleLogoMouseEnter = () => {

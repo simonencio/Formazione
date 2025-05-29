@@ -70,6 +70,7 @@ const MenuGenerico = ({
     onAnchorClick,
 }) => {
     const [openParent, setOpenParent] = useState(null);
+    const { isDarkMode } = useTheme();
 
     const toggleParent = (slug) => {
         setOpenParent((prev) => (prev === slug ? null : slug));
@@ -112,7 +113,7 @@ const MenuGenerico = ({
                         <li key={item.slug} className="w-fit my-1">
                             <button
                                 onClick={() => toggleParent(item.slug)}
-                                className={`w-full text-left px-2 py-1 font-semibold rounded hover:bg-gray-300 dark:hover:bg-gray-700`}
+                                className={`w-full text-left px-2 py-1 font-semibold rounded hover:${isDarkMode ? "bg-gray-700" : "bg-gray-300"}`}
                                 aria-expanded={openParent === item.slug}
                                 aria-controls={`${item.slug}-children`}
                             >

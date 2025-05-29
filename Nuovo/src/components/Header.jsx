@@ -12,6 +12,10 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dropdownWrapperRef = useRef(null);
 
+    // Per tooltip logo
+    const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const [showLogoTooltip, setShowLogoTooltip] = useState(false);
+
     const toggleDropdown = () => setDropdownOpen(open => !open);
 
     useEffect(() => {
@@ -26,12 +30,37 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
 
     const logoSrc = isDarkMode ? "/kalimero_logo2.png" : "/kalimero_logo.png";
 
+    // Funzione per controllare se siamo sopra md
+    const isAboveMd = () => window.innerWidth >= 768;
+
+    // Gestione tooltip logo
+    const handleLogoMouseEnter = () => {
+        if (isAboveMd()) setShowLogoTooltip(true);
+    };
+    const handleLogoMouseLeave = () => {
+        setShowLogoTooltip(false);
+    };
+
+    const handleMouseMove = (e) => {
+        setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    useEffect(() => {
+        const onResize = () => {
+            if (!isAboveMd()) {
+                setShowLogoTooltip(false);
+            }
+        };
+        window.addEventListener("resize", onResize);
+        return () => window.removeEventListener("resize", onResize);
+    }, []);
+
     const headerClasses = `sticky top-0 z-50 p-4 flex justify-between items-center shadow-lg transition-colors duration-300 ${isDarkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-black"}`;
 
     const buttonClasses = `cursor-pointer text-[#c22e35] px-3 py-2 rounded transition-colors duration-300`;
 
     return (
-        <header className={headerClasses}>
+        <header className={headerClasses} onMouseMove={handleMouseMove}>
             {/* Menu mobile (hamburger) */}
             <span
                 id="icona-hamburger"
@@ -40,15 +69,21 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
                 role="button"
                 tabIndex={0}
                 aria-label="Apri Menu"
-
             >
                 <FontAwesomeIcon icon={faBars} size="lg" />
             </span>
 
-
-            {/* Logo */}
+            {/* Logo con tooltip */}
             <div className="lg:justify-start">
-                <Logo src={logoSrc} contentTopRef={contentTopRef} />
+                <a
+                    href="https://www.kalimero.it/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onMouseEnter={handleLogoMouseEnter}
+                    onMouseLeave={handleLogoMouseLeave}
+                >
+                    <Logo src={logoSrc} contentTopRef={contentTopRef} />
+                </a>
             </div>
 
             {/* Azioni: Tema + Ricerca */}
@@ -68,7 +103,6 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
                             className="transition-transform duration-300 ease-in-out hover:scale-160 hover:shadow-xl"
                         />
                     </span>
-
 
                     {dropdownOpen && (
                         <ThemeModeDropdown
@@ -96,11 +130,23 @@ const Header = ({ setMenuOpen, contentTopRef }) => {
                         className="transition-transform duration-300 ease-in-out hover:scale-150 hover:shadow-xl"
                     />
                 </span>
-
             </div>
 
             {/* Modale ricerca */}
             <ModaleRicerca isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
+            {/* Tooltip logo */}
+            {showLogoTooltip && (
+                <div
+                    className="fixed z-50 px-3 py-1 text-sm bg-black text-white rounded pointer-events-none"
+                    style={{
+                        top: mousePos.y + 20,
+                        left: mousePos.x + 20,
+                    }}
+                >
+                    Home
+                </div>
+            )}
         </header>
     );
 };

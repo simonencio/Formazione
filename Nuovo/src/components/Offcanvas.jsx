@@ -86,8 +86,9 @@ const Offcanvas = ({ menuOpen, setMenuOpen, pagesTree, currentSlug, onLinkClick,
                                         src={logoSrc}
                                         contentTopRef={contentTopRef}
                                         onClick={(e) => {
+                                            e.preventDefault();
                                             setMenuOpen(false);
-                                            scrollToTop(setCurrentAnchorId);
+                                            navigate("/home");
                                         }}
                                     />
                                 </div>

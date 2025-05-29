@@ -1,14 +1,16 @@
-import { handleLogoClick } from "../utils/logo";
-
+import { useNavigate } from "react-router-dom";
 
 const Logo = ({ src, contentTopRef = null, className = "", onClick = null }) => {
-    const logoClassName = "w-[130px] lg:w-[180px] h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110 hover:shadow-xl"; // Base dimensione logo
+    const navigate = useNavigate();
+
+    const logoClassName = "w-[130px] lg:w-[180px] h-auto cursor-pointer transition-transform duration-300 ease-in-out hover:scale-110 ";
 
     const handleClick = (e) => {
         if (onClick) {
             onClick(e);
         } else {
-            handleLogoClick(e, null, contentTopRef);
+            e.preventDefault(); // evita che il link faccia reload della pagina
+            navigate("/home");
         }
     };
 
@@ -16,7 +18,7 @@ const Logo = ({ src, contentTopRef = null, className = "", onClick = null }) => 
         <img
             src={src}
             alt="Logo"
-            className={`${logoClassName} ${className}`} // Uniamo la classe base con quella passata come prop
+            className={`${logoClassName} ${className}`}
             onClick={handleClick}
         />
     );
@@ -24,7 +26,7 @@ const Logo = ({ src, contentTopRef = null, className = "", onClick = null }) => 
     return (
         <div className="flex-1 flex items-center justify-center">
             {contentTopRef ? (
-                <a href="/" onClick={handleClick}>
+                <a href="/home" onClick={handleClick}>
                     {image}
                 </a>
             ) : (

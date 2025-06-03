@@ -2,7 +2,7 @@ import axios from 'axios';
 import { extractAnchorsFromHTML } from '../utils/ancore';
 
 
-const API_URL = "https://guidawp.migsrls.it/wp-json/wp/v2/pages";
+const API_URL = "https://backend.guidawordpress.online/wp-json/wp/v2/pages";
 console.log('API URL:', API_URL);// Pagine
 export const fetchPages = async () => {
     try {
